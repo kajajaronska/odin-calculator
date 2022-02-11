@@ -19,7 +19,8 @@ body {
 
 .display {
     width: 40rem;
-    height: 5rem;
+    height: 12rem;
+    font-size: 5rem;
 }
 
 .buttons {
@@ -36,6 +37,6 @@ body {
     background-color: aqua;
     font-size: 5rem;
 }
-.large {
+/* .large {
     /* width: 20rem; */
-}
+} */
