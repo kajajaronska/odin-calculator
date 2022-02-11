@@ -17,7 +17,7 @@
 // const divide_btn = document.querySelector('#divide');
 // const equal_btn = document.querySelector('#equal');
 // const dot = document.querySelector('#dot');
-const btn = document.querySelectorAll('.button');
+const numBtn = document.querySelectorAll('.num-btn');
 
 
 const display_currentValue = document.querySelector('.display-value');
@@ -33,7 +33,9 @@ let calculations;
 /////////////////////////
 // BUTTONS - ADDING EVENT LISTENERS
 
-btn.forEach((button)=> {
+numBtn.forEach((button)=> {
+
+    console.log('click!')
 
     button.addEventListener('click', () => {
         display_currentValue.textContent = button.textContent;
