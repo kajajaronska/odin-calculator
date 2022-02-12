@@ -11,47 +11,84 @@ const display_calculations = document.querySelector('.calculations');
 /////////////////////////
 //  DISPLAY FUNCTIONALITY
 
-let currentValue = 0;
+let currentValue = null;
 let calculations;
-let operator;
+let operator = null;
 
 
 /////////////////////////
 // BUTTONS - ADDING EVENT LISTENER
 
 numBtn.forEach((button)=> {
-
     button.addEventListener('click', () => {
-        display_currentValue.textContent = button.textContent;
-        currentValue = +button.textContent;
+        currentValue = +button.dataset.value;
+        display_currentValue.textContent = currentValue;
 
-        console.log(button.textContent, typeof currentValue);
+        calculate();
+            // console.log(button.dataset.value, typeof currentValue);
     });
 
 });
 
 funcBtn.forEach((button) => {
-
     button.addEventListener('click', () => {
-        operator = button.textContent;
+        currentValue = button.dataset.value;
 
-        console.log(button, operator, operate(10,6,operator));
-        
+        calculate();
+
+        // console.log( operator, typeof operator, operate(10,6,operator));
     });
 });
 
+/////////////////////////
+// CALCULATOR FUNCTIONALITY
 
+// firstNum, operator, secondNum, equal button => calculate using operate function
 
-console.log(currentValue)
+let firstNumber = null; 
+let secondNumber = null;
 
+const calculate= function() {
+    
+    if(!firstNumber && !secondNumber && !operator) {
+        firstNumber = currentValue;
+        console.log("SCENARIO 1");
+        console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
+        return;
+    } else if (firstNumber && !secondNumber && !operator) {
+        operator = currentValue;
+        console.log("SCENARIO 2")
+        console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
+        return;
+    } else if(firstNumber && operator && !secondNumber) {
+        secondNumber = currentValue;
+        console.log("SCENARIO 3")
+        console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
 
+        return;
+    }
 
+    // if(firstNumber && !secondNumber && !operator) {
+    //     console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
+    //     return;
+    // };
 
+    // if(firstNumber && operator && !secondNumber) {
+    //     secondNumber = currentValue;
+    //     console.log(`${currentValue}: this a number just clicked`)
+    //     console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
 
+    //     return;
+    // }
+    // if(firstNumber !=)
+    
+    // if(firstNumber !== null && operator === null) firstNumber = currentValue;
 
+    // if(firstNumber !== null && operator !== null) secondNumber = currentValue;
+    // console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
+};
 
-
-
+// console.log(firstNumber,secondNumber);
 
 
 /////////////////////////
@@ -67,13 +104,12 @@ const operate = function(firstNum, secondNum, operator) {
     let result;
     if(operator==='+') result = add(firstNum,secondNum);
     if(operator==='-') result = substract(firstNum,secondNum);
-    if(operator==='×') result = multiply(firstNum,secondNum);
-    if(operator==='÷') result = divide(firstNum,secondNum);
+    if(operator==='*') result = multiply(firstNum,secondNum);
+    if(operator==='/') result = divide(firstNum,secondNum);
     
     return result;
 
 };
 
-let calculation = operate(10,6,operator);
+// let calculation = operate(10,6,operator);
 
-console.log(calculation);
