@@ -1,23 +1,8 @@
 /////////////////////////
 // SELECTING QUERIES
 
-// const one = document.querySelector('#one');
-// const two = document.querySelector('#two');
-// const three = document.querySelector('#three');
-// const four = document.querySelector('#four');
-// const five = document.querySelector('#five');
-// const six = document.querySelector('#six');
-// const seven = document.querySelector('#seven');
-// const eight = document.querySelector('#eight');
-// const nine = document.querySelector('#nine');
-// const zero = document.querySelector('#zero');
-// const add_btn = document.querySelector('#plus');
-// const substract_btn = document.querySelector('#minus');
-// const multiply_btn = document.querySelector('#multiply');
-// const divide_btn = document.querySelector('#divide');
-// const equal_btn = document.querySelector('#equal');
-// const dot = document.querySelector('#dot');
 const numBtn = document.querySelectorAll('.num-btn');
+const funcBtn = document.querySelectorAll('.function-btn');
 
 
 const display_currentValue = document.querySelector('.display-value');
@@ -28,14 +13,13 @@ const display_calculations = document.querySelector('.calculations');
 
 let currentValue = 0;
 let calculations;
+let operator;
 
 
 /////////////////////////
-// BUTTONS - ADDING EVENT LISTENERS
+// BUTTONS - ADDING EVENT LISTENER
 
 numBtn.forEach((button)=> {
-
-    console.log('click!')
 
     button.addEventListener('click', () => {
         display_currentValue.textContent = button.textContent;
@@ -45,6 +29,17 @@ numBtn.forEach((button)=> {
     });
 
 });
+
+funcBtn.forEach((button) => {
+
+    button.addEventListener('click', () => {
+        operator = button.textContent;
+
+        console.log(button, operator, operate(10,6,operator));
+        
+    });
+});
+
 
 
 console.log(currentValue)
@@ -72,13 +67,13 @@ const operate = function(firstNum, secondNum, operator) {
     let result;
     if(operator==='+') result = add(firstNum,secondNum);
     if(operator==='-') result = substract(firstNum,secondNum);
-    if(operator==='*') result = multiply(firstNum,secondNum);
-    if(operator==='/') result = divide(firstNum,secondNum);
+    if(operator==='×') result = multiply(firstNum,secondNum);
+    if(operator==='÷') result = divide(firstNum,secondNum);
     
     return result;
 
 };
 
-let calculation = operate(10,6,'/');
+let calculation = operate(10,6,operator);
 
-// console.log(calculation);
+console.log(calculation);
