@@ -3,7 +3,7 @@
 
 const numBtn = document.querySelectorAll('.num-btn');
 const funcBtn = document.querySelectorAll('.function-btn');
-
+const equalBtn = document.querySelector('.equal-btn');
 
 const display_currentValue = document.querySelector('.display-value');
 const display_calculations = document.querySelector('.calculations');
@@ -14,6 +14,7 @@ const display_calculations = document.querySelector('.calculations');
 let currentValue = null;
 let calculations;
 let operator = null;
+let result;
 
 
 /////////////////////////
@@ -38,6 +39,13 @@ funcBtn.forEach((button) => {
         // console.log( operator, typeof operator, operate(10,6,operator));
     });
 });
+
+equalBtn.addEventListener('click',() => {
+    operate(firstNumber,secondNumber,operator);
+    display_currentValue.textContent = result;
+
+    console.log(result);
+})
 
 /////////////////////////
 // CALCULATOR FUNCTIONALITY
@@ -64,7 +72,7 @@ const calculate= function() {
         console.log("SCENARIO 3")
         console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
         
-        console.log(operate(firstNumber,secondNumber,operator));
+        // console.log(operate(firstNumber,secondNumber,operator));
     }
 
 };
@@ -82,7 +90,7 @@ const divide = (a,b) => a / b;
 
 
 const operate = function(firstNum, secondNum, operator) {
-    let result;
+    
     if(operator==='+') result = add(firstNum,secondNum);
     if(operator==='-') result = substract(firstNum,secondNum);
     if(operator==='*') result = multiply(firstNum,secondNum);
