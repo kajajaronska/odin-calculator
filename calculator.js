@@ -5,6 +5,7 @@ const numBtn = document.querySelectorAll('.num-btn');
 const funcBtn = document.querySelectorAll('.function-btn');
 const equalBtn = document.querySelector('.equal-btn');
 const allClearBtn = document.querySelector('.clear-btn');
+const deleteBtn = document.querySelector('.delete-btn');
 
 const display_currentValue = document.querySelector('.display-value');
 const display_calculations = document.querySelector('.calculations');
@@ -14,7 +15,7 @@ const display_calculations = document.querySelector('.calculations');
 
 let currentValue = null;
 let calculations;
-let result;
+let result = null;
 
 
 /////////////////////////
@@ -42,6 +43,11 @@ equalBtn.addEventListener('click',() => {
     operate(firstNumber,secondNumber,operator);
     display_currentValue.textContent = result;
 
+// Resetting firstNumber variable and array
+
+firstNumberArray = [];
+firstNumber = null;
+
 // Add a function to repeat latest calculation on the result if button is clicked again;
 
 
@@ -65,11 +71,38 @@ allClearBtn.addEventListener('click', () => {
     console.log(firstNumber, secondNumber, firstNumberArray, secondNumberArray);
 });
 
+// Delete button 
+
+deleteBtn.addEventListener('click', ()=>{
+    // Deleting last digit of the first number
+    if(!secondNumberArray.length) {
+        firstNumberArray.pop();
+        firstNumber = +(firstNumberArray.join(''));
+        display_currentValue.textContent = firstNumber;
+
+        console.log(firstNumber,secondNumber,operator)
+
+        return;
+    };
+    
+    // Deleting last digit of the second number
+    if(secondNumberArray.length) {
+        secondNumberArray.pop();
+        secondNumber = +(secondNumberArray.join(''));
+        display_currentValue.textContent = secondNumber;
+
+        console.log(firstNumber,secondNumber,operator);
+
+        return;
+    };
+    
+});
+
 
 /////////////////////////
 // CALCULATOR FUNCTIONALITY
 
-// firstNumber | operator | secondNumber | result
+// firstNumber -> operator -> secondNumber -> result
 
 
 let firstNumberArray = []; 
