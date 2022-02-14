@@ -16,6 +16,7 @@ const display_calculations = document.querySelector('.calculations');
 let currentValue = null;
 let calculations;
 let result = null;
+let euqalIsActive = false;
 
 
 /////////////////////////
@@ -40,18 +41,32 @@ funcBtn.forEach((button) => {
 
 // Equal sign button
 equalBtn.addEventListener('click',() => {
+
+if(!euqalIsActive) {
     operate(firstNumber,secondNumber,operator);
     display_currentValue.textContent = result;
 
 // Resetting firstNumber variable and array
 
-firstNumberArray = [];
-firstNumber = null;
+    // firstNumberArray = [];
+    // firstNumberArray[0] = result;
+    // firstNumber = result;
+    euqalIsActive = true;
 
-// Add a function to repeat latest calculation on the result if button is clicked again;
+    console.log(result,firstNumber,secondNumber, operator);
 
+    return;
+}
 
-    console.log(result);
+// Add a function to repeat latest calculation on the result if equal button is clicked again;
+
+if(euqalIsActive) {
+    operate(result,secondNumber,operator);
+    display_currentValue.textContent = result;
+
+    console.log(result,firstNumber,secondNumber, operator);
+}
+
 });
 
 // All Clear (AC) button 
