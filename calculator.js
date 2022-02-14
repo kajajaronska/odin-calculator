@@ -25,7 +25,6 @@ numBtn.forEach((button)=> {
         display_currentValue.textContent = currentValue;
 
         calculate();
-            // console.log(button.dataset.value, typeof currentValue);
     });
 
 });
@@ -54,41 +53,23 @@ const calculate= function() {
         firstNumber = currentValue;
         console.log("SCENARIO 1");
         console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
-        return;
+        // return;
     } else if (firstNumber && !secondNumber && !operator) {
         operator = currentValue;
         console.log("SCENARIO 2")
         console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
-        return;
+        // return;
     } else if(firstNumber && operator && !secondNumber) {
         secondNumber = currentValue;
         console.log("SCENARIO 3")
         console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
-
-        return;
+        
+        console.log(operate(firstNumber,secondNumber,operator));
     }
 
-    // if(firstNumber && !secondNumber && !operator) {
-    //     console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
-    //     return;
-    // };
-
-    // if(firstNumber && operator && !secondNumber) {
-    //     secondNumber = currentValue;
-    //     console.log(`${currentValue}: this a number just clicked`)
-    //     console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
-
-    //     return;
-    // }
-    // if(firstNumber !=)
-    
-    // if(firstNumber !== null && operator === null) firstNumber = currentValue;
-
-    // if(firstNumber !== null && operator !== null) secondNumber = currentValue;
-    // console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
 };
 
-// console.log(firstNumber,secondNumber);
+
 
 
 /////////////////////////
