@@ -13,7 +13,6 @@ const display_calculations = document.querySelector('.calculations');
 
 let currentValue = null;
 let calculations;
-let operator = null;
 let result;
 
 
@@ -22,10 +21,8 @@ let result;
 
 numBtn.forEach((button)=> {
     button.addEventListener('click', () => {
-        currentValue = +button.dataset.value;
-        display_currentValue.textContent = currentValue;
-
-        calculate();
+        currentValue = button.dataset.value;
+        assignNumVariables();
     });
 
 });
@@ -33,6 +30,7 @@ numBtn.forEach((button)=> {
 funcBtn.forEach((button) => {
     button.addEventListener('click', () => {
         currentValue = button.dataset.value;
+        console.log("Operator clicked!")
 
         calculate();
 
@@ -50,25 +48,56 @@ equalBtn.addEventListener('click',() => {
 /////////////////////////
 // CALCULATOR FUNCTIONALITY
 
-// firstNum, operator, secondNum, equal button => calculate using operate function
 
-let firstNumber = null; 
+let firstNumberArray = []; 
+let secondNumberArray = [];
+let firstNumber = null;
 let secondNumber = null;
+let operator = null;
+
+const assignNumVariables = function () {
+    if(!firstNumberArray.length && !secondNumberArray.length && !operator) {
+        firstNumberArray.push(currentValue);
+        firstNumber = +(firstNumberArray.join(''));
+
+        display_currentValue.textContent = firstNumber;
+
+
+        console.log("SCENARIO 1");
+        console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
+    
+    } else if((firstNumberArray.length >= 0) && !secondNumberArray.length && !operator){
+        firstNumberArray.push(currentValue);
+        firstNumber = +(firstNumberArray.join(''));
+
+        display_currentValue.textContent = firstNumber;
+
+        console.log("Second number clicked");
+        console.log(firstNumber, secondNumber, operator);
+    }
+};
+
+const assignOperator = function() {
+
+};
 
 const calculate= function() {
     
-    if(!firstNumber && !secondNumber && !operator) {
-        firstNumber = currentValue;
+    if(!firstNumber.length && !secondNumber.length && !operator) {
+        firstNumber[0] = +currentValue;
         console.log("SCENARIO 1");
-        console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
+        console.log(`${firstNumber[0]}: this is a first number `,`${secondNumber[0]}: this is a second number`, `${operator}: this is the operator`);
         // return;
+    } else if(firstNumber.length && !secondNumber.length && !operator){
+        
+    
     } else if (firstNumber && !secondNumber && !operator) {
         operator = currentValue;
         console.log("SCENARIO 2")
         console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
         // return;
     } else if(firstNumber && operator && !secondNumber) {
-        secondNumber = currentValue;
+        secondNumber = +currentValue;
         console.log("SCENARIO 3")
         console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
         
