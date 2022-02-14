@@ -30,11 +30,7 @@ numBtn.forEach((button)=> {
 funcBtn.forEach((button) => {
     button.addEventListener('click', () => {
         currentValue = button.dataset.value;
-        console.log("Operator clicked!")
-
-        calculate();
-
-        // console.log( operator, typeof operator, operate(10,6,operator));
+        assignOperator();
     });
 });
 
@@ -56,57 +52,66 @@ let secondNumber = null;
 let operator = null;
 
 const assignNumVariables = function () {
+
+    // Assigning first number of the calculation with one and more digits
     if(!firstNumberArray.length && !secondNumberArray.length && !operator) {
         firstNumberArray.push(currentValue);
         firstNumber = +(firstNumberArray.join(''));
 
+        // Updating display
         display_currentValue.textContent = firstNumber;
 
+        console.log("First digit clicked");
+        console.log(firstNumber, secondNumber, operator);
 
-        console.log("SCENARIO 1");
-        console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
+        return;
     
-    } else if((firstNumberArray.length >= 0) && !secondNumberArray.length && !operator){
+    } else if((firstNumberArray.length >= 1) && !secondNumberArray.length && !operator){
         firstNumberArray.push(currentValue);
         firstNumber = +(firstNumberArray.join(''));
 
+        // Updating display
         display_currentValue.textContent = firstNumber;
 
-        console.log("Second number clicked");
+        console.log("Next digit clicked");
         console.log(firstNumber, secondNumber, operator);
-    }
+
+        return;
+    } 
+    // Assigning second number of the calculation with one or more digits
+    else if (firstNumberArray.length && operator && !secondNumberArray.length) {
+        secondNumberArray.push(currentValue);
+        secondNumber = +(secondNumberArray.join(''));
+
+        // Updating display
+        display_currentValue.textContent = secondNumber;
+
+        console.log("First digit of the second number everyone!");
+        console.log(firstNumber, secondNumber, operator);
+
+        return;
+    } else if(firstNumberArray.length && operator && secondNumberArray.length) {
+        secondNumberArray.push(currentValue);
+        secondNumber = +(secondNumberArray.join(''));
+
+        // Updating display
+        display_currentValue.textContent = secondNumber;
+
+        console.log("second digit! second number!");
+        console.log(firstNumber, secondNumber, operator);
+
+        return;
+    };
+
+
 };
 
 const assignOperator = function() {
+    if (firstNumberArray.length && !secondNumberArray.length && !operator) operator = currentValue;
 
+    console.log("Operator clicked! yo!");
+    console.log(firstNumber, secondNumber, operator);
 };
-
-const calculate= function() {
-    
-    if(!firstNumber.length && !secondNumber.length && !operator) {
-        firstNumber[0] = +currentValue;
-        console.log("SCENARIO 1");
-        console.log(`${firstNumber[0]}: this is a first number `,`${secondNumber[0]}: this is a second number`, `${operator}: this is the operator`);
-        // return;
-    } else if(firstNumber.length && !secondNumber.length && !operator){
-        
-    
-    } else if (firstNumber && !secondNumber && !operator) {
-        operator = currentValue;
-        console.log("SCENARIO 2")
-        console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
-        // return;
-    } else if(firstNumber && operator && !secondNumber) {
-        secondNumber = +currentValue;
-        console.log("SCENARIO 3")
-        console.log(`${firstNumber}: this is a first number `,`${secondNumber}: this is a second number`, `${operator}: this is the operator`);
-        
-        // console.log(operate(firstNumber,secondNumber,operator));
-    }
-
-};
-
-
 
 
 /////////////////////////
