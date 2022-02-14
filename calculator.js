@@ -4,6 +4,7 @@
 const numBtn = document.querySelectorAll('.num-btn');
 const funcBtn = document.querySelectorAll('.function-btn');
 const equalBtn = document.querySelector('.equal-btn');
+const allClearBtn = document.querySelector('.clear-btn');
 
 const display_currentValue = document.querySelector('.display-value');
 const display_calculations = document.querySelector('.calculations');
@@ -17,16 +18,18 @@ let result;
 
 
 /////////////////////////
-// BUTTONS - ADDING EVENT LISTENER
+// EVENT LISTENERS FOR ALL BUTTONS
 
+
+// All digits buttons
 numBtn.forEach((button)=> {
     button.addEventListener('click', () => {
         currentValue = button.dataset.value;
         assignNumVariables();
     });
-
 });
 
+// All operator buttons (add, substract, multiply, divide)
 funcBtn.forEach((button) => {
     button.addEventListener('click', () => {
         currentValue = button.dataset.value;
@@ -34,12 +37,34 @@ funcBtn.forEach((button) => {
     });
 });
 
+// Equal sign button
 equalBtn.addEventListener('click',() => {
     operate(firstNumber,secondNumber,operator);
     display_currentValue.textContent = result;
 
+// Add a function to repeat latest calculation on the result if button is clicked again;
+
+
     console.log(result);
-})
+});
+
+// All Clear (AC) button 
+
+allClearBtn.addEventListener('click', () => {
+
+    // Resetting all variables and arrays
+    firstNumberArray = []; 
+    secondNumberArray = [];
+    firstNumber = null;
+    secondNumber = null;
+    operator = null;
+
+    // Updating display
+    display_currentValue.textContent = 0;
+
+    console.log(firstNumber, secondNumber, firstNumberArray, secondNumberArray);
+});
+
 
 /////////////////////////
 // CALCULATOR FUNCTIONALITY
