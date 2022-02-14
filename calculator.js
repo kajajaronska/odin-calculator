@@ -44,6 +44,8 @@ equalBtn.addEventListener('click',() => {
 /////////////////////////
 // CALCULATOR FUNCTIONALITY
 
+// firstNumber | operator | secondNumber | result
+
 
 let firstNumberArray = []; 
 let secondNumberArray = [];
@@ -107,7 +109,12 @@ const assignNumVariables = function () {
 };
 
 const assignOperator = function() {
+
+    // Assigning operator if there isn't one
     if (firstNumberArray.length && !secondNumberArray.length && !operator) operator = currentValue;
+
+    // Assigning operator if user changes its mind, i.e. clicks "2", then "+", then "-"
+    if(operator) operator = currentValue;
 
     console.log("Operator clicked! yo!");
     console.log(firstNumber, secondNumber, operator);
@@ -134,5 +141,4 @@ const operate = function(firstNum, secondNum, operator) {
 
 };
 
-// let calculation = operate(10,6,operator);
 
