@@ -14,8 +14,13 @@ const display_calculations = document.querySelector('.calculations');
 //  DISPLAY FUNCTIONALITY
 
 let currentValue = null;
-let calculations;
-let result = null;
+let currentOperator = null;
+let calculationsArr = [];
+
+display_calculations.textContent = calculationsArr.join('');
+
+
+
 
 /////////////////////////
 // EVENT LISTENERS FOR ALL BUTTONS
@@ -33,6 +38,7 @@ numBtn.forEach((button)=> {
 funcBtn.forEach((button) => {
     button.addEventListener('click', () => {
         currentValue = button.dataset.value;
+        currentOperator = button.textContent;
         assignOperator();
     });
 });
@@ -59,6 +65,8 @@ allClearBtn.addEventListener('click', () => {
 
     // Updating display
     display_currentValue.textContent = 0;
+    display_calculations.textContent = '';
+    
 
     console.log(firstNumber, secondNumber, firstNumberArray, secondNumberArray);
 });
@@ -70,7 +78,10 @@ deleteBtn.addEventListener('click', ()=>{
     if(!secondNumberArray.length) {
         firstNumberArray.pop();
         firstNumber = +(firstNumberArray.join(''));
+        
         display_currentValue.textContent = firstNumber;
+        calculationsArr.pop();
+        display_calculations.textContent = calculationsArr.join('');
 
         console.log(firstNumber,secondNumber,operator)
 
@@ -82,6 +93,8 @@ deleteBtn.addEventListener('click', ()=>{
         secondNumberArray.pop();
         secondNumber = +(secondNumberArray.join(''));
         display_currentValue.textContent = secondNumber;
+        calculationsArr.pop();
+        display_calculations.textContent = calculationsArr.join('');
 
         console.log(firstNumber,secondNumber,operator);
 
@@ -102,6 +115,7 @@ let secondNumberArray = [];
 let firstNumber = null;
 let secondNumber = null;
 let operator = null;
+let result = null;
 
 const assignNumVariables = function () {
 
@@ -112,6 +126,8 @@ const assignNumVariables = function () {
 
         // Updating display
         display_currentValue.textContent = firstNumber;
+        calculationsArr.push(currentValue);
+        display_calculations.textContent = calculationsArr.join('');
 
         console.log("First digit clicked");
         console.log(firstNumber, secondNumber, operator);
@@ -124,6 +140,8 @@ const assignNumVariables = function () {
 
         // Updating display
         display_currentValue.textContent = firstNumber;
+        calculationsArr.push(currentValue);
+        display_calculations.textContent = calculationsArr.join('');
 
         console.log("Next digit clicked");
         console.log(firstNumber, secondNumber, operator);
@@ -137,6 +155,8 @@ const assignNumVariables = function () {
 
         // Updating display
         display_currentValue.textContent = secondNumber;
+        calculationsArr.push(currentValue);
+        display_calculations.textContent = calculationsArr.join('');
 
         console.log("First digit of the second number everyone!");
         console.log(firstNumber, secondNumber, operator);
@@ -148,6 +168,8 @@ const assignNumVariables = function () {
 
         // Updating display
         display_currentValue.textContent = secondNumber;
+        calculationsArr.push(currentValue);
+        display_calculations.textContent = calculationsArr.join('');
 
         console.log("second digit! second number!");
         console.log(firstNumber, secondNumber, operator);
@@ -161,19 +183,35 @@ const assignNumVariables = function () {
 const assignOperator = function() {
 
     // Assigning operator if there isn't one
-    if (firstNumber && !secondNumber && !operator) operator = currentValue;
+    if (firstNumber && !secondNumber && !operator) {
+        operator = currentValue;
+        calculationsArr.push(currentOperator);
+        display_calculations.textContent = calculationsArr.join('');
 
+        return;
+    };
     // Assigning operator if user changes its mind, i.e. clicks "2", then "+", then "-"
-    if(operator && !result) operator = currentValue;
+    if(operator && !result) {
+        operator = currentOperator;
+        
+        calculationsArr.pop()
+        calculationsArr.push(currentOperator)
+        display_calculations.textContent = calculationsArr.join('');
 
-    // Assingning operator if result becomes a first number and there is already a second number assigned in memory
+
+        return;
+    };
+    // Assignning operator if result variable becomes a first number and there is already a second number assigned in memory
     if(operator && result) {
         secondNumber = null;
         secondNumberArray = [];
 
-        operator = currentValue;
+        operator = currentOperator;
         display_currentValue.textContent = firstNumber;
+        calculationsArr.push(currentOperator);
+        display_calculations.textContent = calculationsArr.join('');
 
+        return;
     }
 
     console.log("Operator clicked! yo!");
