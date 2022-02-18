@@ -14,10 +14,19 @@ const display_calculations = document.querySelector('.calculations');
 //  DISPLAY FUNCTIONALITY
 
 let currentValue = null;
-let currentOperator = null;
+let currentButton = null;
 let calculationsArr = [];
 
 display_calculations.textContent = calculationsArr.join('');
+
+
+let updateCalcDisplay = function(){
+    calculationsArr.push(currentButton);
+    display_calculations.textContent = calculationsArr.join('');
+};
+
+// updateCalcDisplay()
+
 
 
 
@@ -29,7 +38,8 @@ display_calculations.textContent = calculationsArr.join('');
 // All digits buttons
 numBtn.forEach((button)=> {
     button.addEventListener('click', () => {
-        currentValue = button.dataset.value;
+        currentValue = button.dataset.value; // for calculations
+        currentButton = button.textContent; // for display
         assignNumVariables();
     });
 });
@@ -38,20 +48,17 @@ numBtn.forEach((button)=> {
 funcBtn.forEach((button) => {
     button.addEventListener('click', () => {
         currentValue = button.dataset.value; // for calculations
-        currentOperator = button.textContent; // for display 
+        currentButton = button.textContent; // for display 
         assignOperator();
     });
 });
 
 // Equal sign button
 equalBtn.addEventListener('click',() => {
-
-    operate(firstNumber,secondNumber,operator);
-    
+     operate(firstNumber,secondNumber,operator);
 });
 
 // All Clear (AC) button 
-
 allClearBtn.addEventListener('click', () => {
 
     // Resetting all variables and arrays
@@ -128,8 +135,7 @@ const assignNumVariables = function () {
 
         // Updating display
         display_currentValue.textContent = firstNumber;
-        calculationsArr.push(currentValue);
-        display_calculations.textContent = calculationsArr.join('');
+        updateCalcDisplay();
 
         console.log("First digit clicked");
         console.log(`first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
@@ -142,8 +148,7 @@ const assignNumVariables = function () {
 
         // Updating display
         display_currentValue.textContent = firstNumber;
-        calculationsArr.push(currentValue);
-        display_calculations.textContent = calculationsArr.join('');
+        updateCalcDisplay();
 
         console.log("Next digit clicked");
         console.log(`first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
@@ -157,8 +162,7 @@ const assignNumVariables = function () {
 
         // Updating display
         display_currentValue.textContent = secondNumber;
-        calculationsArr.push(currentValue);
-        display_calculations.textContent = calculationsArr.join('');
+        updateCalcDisplay();
 
         console.log("First digit of the second number everyone!");
         console.log(`first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
@@ -171,8 +175,7 @@ const assignNumVariables = function () {
 
         // Updating display
         display_currentValue.textContent = secondNumber;
-        calculationsArr.push(currentValue);
-        display_calculations.textContent = calculationsArr.join('');
+        updateCalcDisplay();
 
         console.log("next digit! second number!");
         console.log(`first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
@@ -193,8 +196,8 @@ const assignOperator = function() {
         operator = currentValue;
         secondNumberArray = [];
         secondNumber = null;
-        calculationsArr.push(currentOperator);
-        display_calculations.textContent = calculationsArr.join('');
+
+        updateCalcDisplay();
 
         console.log(`SCENARIO 1: first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
 
@@ -206,8 +209,8 @@ const assignOperator = function() {
     else if(operator && !secondNumber) {
         operator = currentValue;
         calculationsArr.pop();
-        calculationsArr.push(currentOperator);
-        display_calculations.textContent = calculationsArr.join('');
+        
+        updateCalcDisplay();
 
         console.log(`SCENARIO 2 REASSIGNING THE OPERATOR:first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
 
@@ -224,15 +227,19 @@ const assignOperator = function() {
 
         operator = currentValue;
 
-        calculationsArr.push(currentOperator);
-        display_calculations.textContent = calculationsArr.join('');
+        updateCalcDisplay();
 
         console.log(`SCENARIO 3 REASSIGNING THE OPERATOR: first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
 
         return;
     }
 
+    // SCENARIO 5: user forgets to click equal button after entering the second number in,
 
+    operate(firstNumber,secondNumber,operator);
+   
+
+    return;
     
 }
 
@@ -257,6 +264,6 @@ const operate = function(firstNum, secondNum, operator) {
 
     return result;
 
-}
+};
 
 
