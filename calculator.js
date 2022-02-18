@@ -202,9 +202,16 @@ const assignOperator = function() {
         return;
     }
 
-    // SCENARIO 5: user forgets to click equal button after entering the second number in,
-
+    // SCENARIO 5: user forgets to click equal button after entering the second number in; trigerring equal button functionality & assigning new operator; 
+   
     operate(firstNumber,secondNumber,operator);
+
+    secondNumberArray = [];
+    secondNumber = null;
+    result = null;
+
+    operator = currentValue;
+    updateCalcDisplay();
 
     return;
     
