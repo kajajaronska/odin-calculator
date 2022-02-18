@@ -25,11 +25,6 @@ let updateCalcDisplay = function(){
     display_calculations.textContent = calculationsArr.join('');
 };
 
-// updateCalcDisplay()
-
-
-
-
 
 /////////////////////////
 // EVENT LISTENERS FOR ALL BUTTONS
@@ -75,9 +70,6 @@ allClearBtn.addEventListener('click', () => {
     calculationsArr = [];
     display_calculations.textContent = calculationsArr.join('');
 
-    
-
-    console.log(firstNumber, secondNumber, firstNumberArray, secondNumberArray);
 });
 
 // Delete button 
@@ -92,8 +84,6 @@ deleteBtn.addEventListener('click', ()=>{
         calculationsArr.pop();
         display_calculations.textContent = calculationsArr.join('');
 
-        console.log(firstNumber,secondNumber,operator)
-
         return;
     };
     
@@ -104,8 +94,6 @@ deleteBtn.addEventListener('click', ()=>{
         display_currentValue.textContent = secondNumber;
         calculationsArr.pop();
         display_calculations.textContent = calculationsArr.join('');
-
-        console.log(firstNumber,secondNumber,operator);
 
         return;
     };
@@ -137,9 +125,6 @@ const assignNumVariables = function () {
         display_currentValue.textContent = firstNumber;
         updateCalcDisplay();
 
-        console.log("First digit clicked");
-        console.log(`first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
-
         return;
     
     } else if((firstNumberArray.length >= 1) && !secondNumber && !operator){
@@ -149,9 +134,6 @@ const assignNumVariables = function () {
         // Updating display
         display_currentValue.textContent = firstNumber;
         updateCalcDisplay();
-
-        console.log("Next digit clicked");
-        console.log(`first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
 
         return;
     } 
@@ -164,9 +146,6 @@ const assignNumVariables = function () {
         display_currentValue.textContent = secondNumber;
         updateCalcDisplay();
 
-        console.log("First digit of the second number everyone!");
-        console.log(`first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
-
         return;
 
     } else if(firstNumber && operator && secondNumber) {
@@ -177,9 +156,6 @@ const assignNumVariables = function () {
         display_currentValue.textContent = secondNumber;
         updateCalcDisplay();
 
-        console.log("next digit! second number!");
-        console.log(`first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
-
         return;
     };
 
@@ -187,10 +163,8 @@ const assignNumVariables = function () {
 };
 
 
-
 const assignOperator = function() {
-    console.log("Operator button was clicked!");
-
+    
     // SCENARIO 1 
     if(!operator) {
         operator = currentValue;
@@ -198,8 +172,6 @@ const assignOperator = function() {
         secondNumber = null;
 
         updateCalcDisplay();
-
-        console.log(`SCENARIO 1: first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
 
         return;
 
@@ -212,15 +184,13 @@ const assignOperator = function() {
         
         updateCalcDisplay();
 
-        console.log(`SCENARIO 2 REASSIGNING THE OPERATOR:first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
-
         return;
     }
 
     // SCENARIO 3
     else if(operator && firstNumber && secondNumber && result) {
 
-        // Resetting second number and result from the previous calculation
+        // Resetting second number and a result from the previous calculation
         secondNumberArray = [];
         secondNumber = null;
         result = null;
@@ -229,19 +199,16 @@ const assignOperator = function() {
 
         updateCalcDisplay();
 
-        console.log(`SCENARIO 3 REASSIGNING THE OPERATOR: first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
-
         return;
     }
 
     // SCENARIO 5: user forgets to click equal button after entering the second number in,
 
     operate(firstNumber,secondNumber,operator);
-   
 
     return;
     
-}
+};
 
 /////////////////////////
 // BASIC CALCULATOR FUNCTIONS
