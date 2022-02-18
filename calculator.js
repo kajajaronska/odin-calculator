@@ -37,8 +37,8 @@ numBtn.forEach((button)=> {
 // All operator buttons (add, substract, multiply, divide)
 funcBtn.forEach((button) => {
     button.addEventListener('click', () => {
-        currentValue = button.dataset.value;
-        currentOperator = button.textContent;
+        currentValue = button.dataset.value; // for calculations
+        currentOperator = button.textContent; // for display 
         assignOperator();
     });
 });
@@ -46,10 +46,15 @@ funcBtn.forEach((button) => {
 // Equal sign button
 equalBtn.addEventListener('click',() => {
 
-        operate(firstNumber,secondNumber,operator);
-        display_currentValue.textContent = result;
+    operate(firstNumber,secondNumber,operator);
+    console.log("Before operate func", `first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
+    display_currentValue.textContent = result;
 
-        console.log(firstNumber,secondNumber, operator);
+    // // Assigning result to the firstNumber
+    firstNumber = result;
+
+
+    console.log("After resetting result", `first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
 });
 
 // All Clear (AC) button 
@@ -62,10 +67,14 @@ allClearBtn.addEventListener('click', () => {
     firstNumber = null;
     secondNumber = null;
     operator = null;
+    result = null;
 
     // Updating display
     display_currentValue.textContent = 0;
     display_calculations.textContent = '';
+    calculationsArr = [];
+    display_calculations.textContent = calculationsArr.join('');
+
     
 
     console.log(firstNumber, secondNumber, firstNumberArray, secondNumberArray);
@@ -130,7 +139,7 @@ const assignNumVariables = function () {
         display_calculations.textContent = calculationsArr.join('');
 
         console.log("First digit clicked");
-        console.log(firstNumber, secondNumber, operator);
+        console.log(`first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
 
         return;
     
@@ -144,7 +153,7 @@ const assignNumVariables = function () {
         display_calculations.textContent = calculationsArr.join('');
 
         console.log("Next digit clicked");
-        console.log(firstNumber, secondNumber, operator);
+        console.log(`first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
 
         return;
     } 
@@ -159,9 +168,10 @@ const assignNumVariables = function () {
         display_calculations.textContent = calculationsArr.join('');
 
         console.log("First digit of the second number everyone!");
-        console.log(firstNumber, secondNumber, operator);
+        console.log(`first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
 
         return;
+
     } else if(firstNumber && operator && secondNumber) {
         secondNumberArray.push(currentValue);
         secondNumber = +(secondNumberArray.join(''));
@@ -171,8 +181,8 @@ const assignNumVariables = function () {
         calculationsArr.push(currentValue);
         display_calculations.textContent = calculationsArr.join('');
 
-        console.log("second digit! second number!");
-        console.log(firstNumber, secondNumber, operator);
+        console.log("next digit! second number!");
+        console.log(`first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
 
         return;
     };
@@ -180,43 +190,120 @@ const assignNumVariables = function () {
 
 };
 
+
+
 const assignOperator = function() {
+    console.log("Operator button was clicked!");
 
-    // Assigning operator if there isn't one
-    if (firstNumber && !secondNumber && !operator) {
+    // SCENARIO 1 
+    if(!operator) {
         operator = currentValue;
-        calculationsArr.push(currentOperator);
-        display_calculations.textContent = calculationsArr.join('');
-
-        return;
-    };
-    // Assigning operator if user changes its mind, i.e. clicks "2", then "+", then "-"
-    if(operator && !result) {
-        operator = currentOperator;
-        
-        calculationsArr.pop()
-        calculationsArr.push(currentOperator)
-        display_calculations.textContent = calculationsArr.join('');
-
-
-        return;
-    };
-    // Assignning operator if result variable becomes a first number and there is already a second number assigned in memory
-    if(operator && result) {
-        secondNumber = null;
         secondNumberArray = [];
-
-        operator = currentOperator;
-        display_currentValue.textContent = firstNumber;
+        secondNumber = null;
         calculationsArr.push(currentOperator);
         display_calculations.textContent = calculationsArr.join('');
+
+        console.log(`SCENARIO 1: first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
+
+        return;
+
+    }
+
+    // SCENARIO 2
+    else if(operator && !secondNumber) {
+        operator = currentValue;
+        calculationsArr.pop();
+        calculationsArr.push(currentOperator);
+        display_calculations.textContent = calculationsArr.join('');
+
+        console.log(`SCENARIO 2 REASSIGNING THE OPERATOR:first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
 
         return;
     }
 
-    console.log("Operator clicked! yo!");
-    console.log(firstNumber, secondNumber, operator, result);
-};
+    // SCENARIO 3
+    else if(operator && firstNumber && secondNumber && result) {
+
+        
+        secondNumberArray = [];
+        secondNumber = null;
+        result = null;
+
+        operator = currentValue;
+
+        calculationsArr.push(currentOperator);
+        display_calculations.textContent = calculationsArr.join('');
+
+        console.log(`SCENARIO 3 REASSIGNING THE OPERATOR: first num:${firstNumber} | second number:${secondNumber} | operator:${operator} | result:${result}`);
+
+        return;
+    }
+
+
+
+
+    
+}
+
+
+
+
+// const assignOperator = function() {
+    
+//     // Assigning operator if first number is chosen and second number && operator are null 
+//     if (firstNumber && !secondNumber && !operator) {
+//         operator = currentValue;
+//         calculationsArr.push(currentOperator);
+//         display_calculations.textContent = calculationsArr.join('');
+
+//         console.log(firstNumber, secondNumber, operator, result);
+
+//         return;
+//     };
+
+
+//     // Assigning operator if user changes its mind, i.e. clicks "2", then "+", then "-"
+//     if(operator && !result) {
+//         operator = currentOperator;
+//         secondNumber = null;
+//         secondNumberArray = [];
+
+        
+//         calculationsArr.pop()
+//         calculationsArr.push(currentOperator)
+//         display_calculations.textContent = calculationsArr.join('');
+
+//         console.log(firstNumber, secondNumber, `Oops! Sorry! Changing to ${operator}`, result);
+
+//         return;
+//     };
+//     // // Assignning operator if result variable becomes a first number and there is already a second number assigned in memory
+//     if(firstNumber && operator && secondNumber && !result) {
+//         secondNumber = null;
+//         secondNumberArray = [];
+
+//         operator = currentOperator;
+//         display_currentValue.textContent = firstNumber;
+
+//         calculationsArr.push(currentOperator);
+
+//         // //  Checking whether last character display was a letter or a number and updating display accordingly
+//         // if(isNaN(lastElement)) {
+//         //     display_calculations.textContent = calculationsArr.join('');
+//         //     console.log("SCENARIO 1", calculationsArr);
+//         // } else {
+//         //     calculationsArr.pop()
+//         //     calculationsArr.push(currentOperator)
+//         //     display_calculations.textContent = calculationsArr.join('');
+//         //     console.log("SCENARIO 2", calculationsArr);
+//         // }     
+
+//         return;
+//     }
+
+//     console.log("Operator clicked! yo!");
+//     console.log(firstNumber, secondNumber, operator, result);
+// };
 
 
 /////////////////////////
@@ -235,10 +322,9 @@ const operate = function(firstNum, secondNum, operator) {
     if(operator==='*') result = multiply(firstNum,secondNum);
     if(operator==='/') result = divide(firstNum,secondNum);
     
-    firstNumber = result;
 
     return result;
 
-};
+}
 
 
