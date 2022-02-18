@@ -29,7 +29,6 @@ let updateCalcDisplay = function(){
 /////////////////////////
 // EVENT LISTENERS FOR ALL BUTTONS
 
-
 // All digits buttons
 numBtn.forEach((button)=> {
     button.addEventListener('click', () => {
@@ -228,11 +227,12 @@ const divide = (a,b) => a / b;
 
 const operate = function(firstNum, secondNum, operator) {
     
-    if(operator==='+') result = add(firstNum,secondNum);
-    if(operator==='-') result = substract(firstNum,secondNum);
-    if(operator==='*') result = multiply(firstNum,secondNum);
-    if(operator==='/') result = divide(firstNum,secondNum);
+    if(operator==='+') longResult = add(firstNum,secondNum);
+    if(operator==='-') longResult = substract(firstNum,secondNum);
+    if(operator==='*') longResult = multiply(firstNum,secondNum);
+    if(operator==='/') longResult = divide(firstNum,secondNum);
     
+    result = Math.round(longResult * 1000000000000)/1000000000000;
     display_currentValue.textContent = result;
     firstNumber = result;
 
