@@ -6,6 +6,7 @@ const funcBtn = document.querySelectorAll('.function-btn');
 const equalBtn = document.querySelector('.equal-btn');
 const allClearBtn = document.querySelector('.clear-btn');
 const deleteBtn = document.querySelector('.delete-btn');
+const dotBtn = document.querySelector('.dot-btn');
 
 const display_currentValue = document.querySelector('.display-value');
 const display_calculations = document.querySelector('.calculations');
@@ -49,7 +50,22 @@ funcBtn.forEach((button) => {
 
 // Equal sign button
 equalBtn.addEventListener('click',() => {
-     operate(firstNumber,secondNumber,operator);
+    if(!firstNumber && !operator && !secondNumber) {
+        alert("Haven't you forgotten something?");
+        return;
+    }
+
+    if(firstNumber && !operator && !secondNumber) {
+        alert("Please enter the operator and a second number.");
+        return;
+    }
+
+    if(firstNumber && operator && !secondNumber) {
+        alert("Only missing a second number now :)")
+        return;
+    }
+
+    operate(firstNumber,secondNumber,operator);
 });
 
 // All Clear (AC) button 
@@ -97,6 +113,34 @@ deleteBtn.addEventListener('click', ()=>{
         return;
     };
     
+});
+
+// Dot button
+
+dotBtn.addEventListener('click', () => {
+
+    currentValue = dotBtn.dataset.value; // for calculations
+    currentButton = dotBtn.textContent; // for display
+
+    if(firstNumber && !operator && !secondNumber) {
+        firstNumberArray.push(currentValue);
+        firstNumber = firstNumberArray.join('');
+
+        display_currentValue.textContent = firstNumber;
+        // updateCalcDisplay();
+        calculationsArr.push(currentButton);
+        display_calculations.textContent = calculationsArr.join('');
+    };
+
+    if(firstNumber && operator && secondNumber) {
+        secondNumberArray.push(currentValue);
+        secondNumber = secondNumberArray.join('');
+
+        display_currentValue.textContent = secondNumber;
+        updateCalcDisplay();
+    };
+
+
 });
 
 
