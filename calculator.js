@@ -1,6 +1,7 @@
 /////////////////////////
 // SELECTING QUERIES
 
+const btn = document.querySelectorAll('.button');
 const numBtn = document.querySelectorAll('.num-btn');
 const funcBtn = document.querySelectorAll('.function-btn');
 const equalBtn = document.querySelector('.equal-btn');
@@ -84,7 +85,7 @@ deleteBtn.addEventListener('click', ()=>{
     // Deleting last digit of the first number
     if(!secondNumberArray.length) {
         firstNumberArray.pop();
-        firstNumber = +(firstNumberArray.join(''));
+        firstNumber = firstNumberArray.join('');
         
         display_currentValue.textContent = firstNumber;
         calculationsArr.pop();
@@ -96,7 +97,7 @@ deleteBtn.addEventListener('click', ()=>{
     // Deleting last digit of the second number
     if(secondNumberArray.length) {
         secondNumberArray.pop();
-        secondNumber = +(secondNumberArray.join(''));
+        secondNumber = secondNumberArray.join('');
         display_currentValue.textContent = secondNumber;
         calculationsArr.pop();
         display_calculations.textContent = calculationsArr.join('');
@@ -110,7 +111,7 @@ deleteBtn.addEventListener('click', ()=>{
 
 dotBtn.addEventListener('click', () => {
 
-    // Preventing user from the double click
+    // Preventing user from the double dot
     if(firstNumberArray[firstNumberArray.length-1] == '.' || secondNumberArray[secondNumberArray.length-1] == '.') return;
 
     currentValue = dotBtn.dataset.value; // for calculations
@@ -137,6 +138,34 @@ dotBtn.addEventListener('click', () => {
     };
 
 });
+
+// Keyboard support 
+
+window.addEventListener('keydown', (e) => {
+    
+    console.log(e.key, typeof e.key);
+
+    const numBtn = document.querySelector(`.num-btn[data-value="${e.key}`);
+    const functionBtn = document.querySelector(`.function-btn[data-value="${e.key}`);
+    if(!numBtn && !functionBtn) console.log("wrong button");
+
+    if(numBtn) {
+        currentValue = numBtn.dataset.value;
+        currentButton = numBtn.textContent; 
+
+        assignNumVariables();
+    };
+
+    if(functionBtn) {
+        currentValue = functionBtn.dataset.value;
+        currentButton = functionBtn.textContent; 
+       
+        assignOperator();
+
+    };
+
+});
+
 
 
 /////////////////////////
