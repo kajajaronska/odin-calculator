@@ -110,6 +110,9 @@ deleteBtn.addEventListener('click', ()=>{
 
 dotBtn.addEventListener('click', () => {
 
+    // Preventing user from the double click
+    if(firstNumberArray[firstNumberArray.length-1] == '.' || secondNumberArray[secondNumberArray.length-1] == '.') return;
+
     currentValue = dotBtn.dataset.value; // for calculations
     currentButton = dotBtn.textContent; // for display
 
@@ -118,9 +121,9 @@ dotBtn.addEventListener('click', () => {
         firstNumber = firstNumberArray.join('');
 
         display_currentValue.textContent = firstNumber;
-        // updateCalcDisplay();
-        calculationsArr.push(currentButton);
-        display_calculations.textContent = calculationsArr.join('');
+        updateCalcDisplay();
+
+        return;
     };
 
     if(firstNumber && operator && secondNumber) {
@@ -129,8 +132,9 @@ dotBtn.addEventListener('click', () => {
 
         display_currentValue.textContent = secondNumber;
         updateCalcDisplay();
-    };
 
+        return;
+    };
 
 });
 
