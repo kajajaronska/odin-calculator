@@ -50,18 +50,9 @@ funcBtn.forEach((button) => {
 
 // Equal sign button
 equalBtn.addEventListener('click',() => {
-    if(!firstNumber && !operator && !secondNumber) {
-        alert("Haven't you forgotten something?");
-        return;
-    }
+    if (!firstNumber || !operator || !secondNumber) {
+        alert("Please choose all of the parameters for your calculation");
 
-    if(firstNumber && !operator && !secondNumber) {
-        alert("Please enter the operator and a second number.");
-        return;
-    }
-
-    if(firstNumber && operator && !secondNumber) {
-        alert("Only missing a second number now :)")
         return;
     }
 
