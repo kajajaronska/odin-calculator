@@ -138,6 +138,14 @@ const assignNumVariables = function () {
     } 
     // Assigning second number of the calculation with one or more digits
     else if (firstNumber && operator && !secondNumber) {
+
+        // Preventing division by 0
+        if(operator === "/" && currentValue === '0') {
+            alert("Oops! Are you trying to divide by 0?😲");
+
+            return;
+        };
+
         secondNumberArray.push(currentValue);
         secondNumber = +(secondNumberArray.join(''));
 
