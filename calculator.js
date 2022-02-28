@@ -1,3 +1,5 @@
+"use strict";
+
 /////////////////////////
 // SELECTING QUERIES
 
@@ -8,6 +10,11 @@ const equalBtn = document.querySelector('.equal-btn');
 const allClearBtn = document.querySelector('.clear-btn');
 const deleteBtn = document.querySelector('.delete-btn');
 const dotBtn = document.querySelector('.dot-btn');
+const desert = document.querySelector('.desert');
+const ocean = document.querySelector('.ocean');
+const forest = document.querySelector('.forest');
+
+const styleBtn = document.querySelectorAll('.style-btn');
 
 const display_currentValue = document.querySelector('.display-value');
 const display_calculations = document.querySelector('.calculations');
@@ -76,7 +83,7 @@ const calcResult = function(){
 
 const deleteDigit = function() {
 
-    
+
 
      // Deleting last digit of the first number
      if(!secondNumberArray.length) {
@@ -346,6 +353,7 @@ const add = (a,b) => a + b;
 const substract = (a,b) => a-b;
 const multiply = (a,b) => a * b;
 const divide = (a,b) => a / b;
+let  longResult;
 
 
 const operate = function(firstNum, secondNum, operator) {
@@ -363,4 +371,17 @@ const operate = function(firstNum, secondNum, operator) {
 
 };
 
+
+/////////////////////////
+// COLOR PALLETES FUNCTIONALITY
+
+
+const setTheme = (theme) => document.documentElement.className = theme;
+
+styleBtn.forEach((button)=>{
+    button.addEventListener('click', ()=> {
+        console.log(button.dataset.value);
+        setTheme(button.dataset.value);
+    });
+});
 
