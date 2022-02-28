@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Smooch+Sans&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -17,6 +19,8 @@ body {
     align-items: center;
 
     overflow: hidden;
+
+    font-family: 'Smooch Sans', sans-serif;
 }
 
 
@@ -51,11 +55,17 @@ body {
 
 .calculations, .display-value {
     height: 6rem;
+    width: 37rem;
     border-radius: 1rem;
 
     font-size: 5rem;
 
-    /* margin: 1rem; */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3rem;
+
+    padding-left: 1rem;
 }
 
 .calculations {
@@ -64,7 +74,6 @@ body {
 
 .display-value {
     background-color: rgb(138, 112, 163);
-    /* padding: 1rem; */
 }
 
 
