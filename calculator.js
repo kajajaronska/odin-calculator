@@ -76,6 +76,8 @@ const calcResult = function(){
 
 const deleteDigit = function() {
 
+    
+
      // Deleting last digit of the first number
      if(!secondNumberArray.length) {
         firstNumberArray.pop();

@@ -1,5 +1,39 @@
+/*****************************/
+/* FONTS */
+/*****************************/
 @import url('https://fonts.googleapis.com/css2?family=Smooch+Sans&display=swap');
 
+/*****************************/
+/* VARIABLES */
+/*****************************/
+
+:root {
+    /* ocean style */
+    --ocean-1:#22223B;
+    --ocean-2:#4A4E69;
+    --ocean-3:#9A8C98;
+    --ocean-4:#C9ADA7;
+    --ocean-5:#F2E9E4;
+
+    /*forest style */
+    --forest-1:#EDE6D5;
+    --forest-2:#AD9984;
+    --forest-3:#6B5949;
+    --forest-4:#B3C799;
+    --forest-5:#788264;
+
+    /*desert style */
+    --desert-1:#F7D3AA;
+    --desert-2:#DF9D6C;
+    --desert-3:#D4814E;
+    --desert-4:#935B3E;
+    --desert-5:#623624;
+    --desert-6:#FFF1E1;
+}
+
+/*****************************/
+/* GLOBAL RESET */
+/*****************************/
 * {
     margin: 0;
     padding: 0;
@@ -10,23 +44,90 @@ html {
     font-size: 62.5%;
 }
 
+/*****************************/
+/* BODY */
+/*****************************/
+
 body {
     height: 100vh;
-    /* width: 100vw; */
-    background-color: gray;
+    background-color: var(--desert-6);
+
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    gap: 2rem;
 
     overflow: hidden;
 
     font-family: 'Smooch Sans', sans-serif;
+    color: white;
 }
 
+/*****************************/
+/* STYLES CONTAINER */
+/*****************************/
 
+.styles-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+
+    width: 20rem;
+    height: auto;
+
+    font-size: 1.5rem;
+
+    
+}
+
+.style-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.style-btn {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+
+    background-color: rgb(243, 235, 126);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.style-info {
+    color: black;
+}
+
+.desert {
+    color: var(--desert-1);
+    background-color: var(--desert-4);
+}
+
+.ocean {
+    color: var(--ocean-5);
+    background-color: var(--ocean-2);
+}
+
+.forest {
+    color: var(--forest-1);
+    background-color: var(--forest-5);
+}
+
+/*****************************/
+/* MAIN CONTAINER */
+/*****************************/
 
 .main-container {
-    background-color: rgba(192, 235, 220, 0.815);
+    background-color: var(--desert-5);
     border-radius: 1rem;
 
     width: 40rem;
@@ -41,7 +142,6 @@ body {
 }
 
 .display {
-    /* background-color: rgb(189, 138, 236); */
     width: 37rem;
     height: auto;
     font-size: 5rem;
@@ -51,14 +151,18 @@ body {
     gap: 1rem;
 }
 
-
+/*****************************/
+/* DISPLAY CONTAINER */
+/*****************************/
 
 .calculations, .display-value {
+    background-color: var(--desert-4);
     height: 6rem;
     width: 37rem;
     border-radius: 1rem;
 
     font-size: 5rem;
+    font-weight: 800;
 
     display: flex;
     justify-content: flex-start;
@@ -68,14 +172,9 @@ body {
     padding-left: 1rem;
 }
 
-.calculations {
-    background-color: rgb(199, 131, 131);
-}
-
-.display-value {
-    background-color: rgb(138, 112, 163);
-}
-
+/*****************************/
+/* CALCULATOR BUTTONS */
+/*****************************/
 
 .buttons {
     width: 37rem;
@@ -95,8 +194,9 @@ body {
     height: 7.25rem;
     border-radius: 50%;
     /* border: black 1px solid; */
-    background-color: rgb(252, 232, 146);
+    background-color: var(--desert-2);
     font-size: 5rem;
+    font-weight: 600;
    
     display: flex;
     justify-content: center;
@@ -112,4 +212,12 @@ body {
 
 .clear-btn, .delete-btn {
     font-size: 3rem;
+}
+
+.function-btn, .equal-btn {
+    background-color: var(--desert-3);
+}
+
+.percentage-btn, .clear-btn, .delete-btn {
+    background-color: var(--desert-4);
 }
