@@ -22,94 +22,16 @@ let calculationsArr = [];
 display_calculations.textContent = calculationsArr.join('');
 
 
-let updateCalcDisplay = function(){
+
+//////////////////////////
+// FUNCTIONS
+
+const updateCalcDisplay = function(){
     calculationsArr.push(currentButton);
     display_calculations.textContent = calculationsArr.join('');
 };
 
-
-/////////////////////////
-// EVENT LISTENERS FOR ALL BUTTONS
-
-// All digits buttons
-numBtn.forEach((button)=> {
-    button.addEventListener('click', () => {
-        currentValue = button.dataset.value; // for calculations
-        currentButton = button.textContent; // for display
-        assignNumVariables();
-    });
-});
-
-// All operator buttons (add, substract, multiply, divide)
-funcBtn.forEach((button) => {
-    button.addEventListener('click', () => {
-        currentValue = button.dataset.value; // for calculations
-        currentButton = button.textContent; // for display 
-        assignOperator();
-    });
-});
-
-// Equal sign button
-equalBtn.addEventListener('click',() => {
-    if (!firstNumber || !operator || !secondNumber) {
-        alert("Please choose all of the parameters for your calculation");
-
-        return;
-    }
-
-    operate(firstNumber,secondNumber,operator);
-});
-
-// All Clear (AC) button 
-allClearBtn.addEventListener('click', () => {
-
-    // Resetting all variables and arrays
-    firstNumberArray = []; 
-    secondNumberArray = [];
-    firstNumber = null;
-    secondNumber = null;
-    operator = null;
-    result = null;
-
-    // Updating display
-    display_currentValue.textContent = 0;
-    display_calculations.textContent = '';
-    calculationsArr = [];
-    display_calculations.textContent = calculationsArr.join('');
-
-});
-
-// Delete button 
-
-deleteBtn.addEventListener('click', ()=>{
-    // Deleting last digit of the first number
-    if(!secondNumberArray.length) {
-        firstNumberArray.pop();
-        firstNumber = firstNumberArray.join('');
-        
-        display_currentValue.textContent = firstNumber;
-        calculationsArr.pop();
-        display_calculations.textContent = calculationsArr.join('');
-
-        return;
-    };
-    
-    // Deleting last digit of the second number
-    if(secondNumberArray.length) {
-        secondNumberArray.pop();
-        secondNumber = secondNumberArray.join('');
-        display_currentValue.textContent = secondNumber;
-        calculationsArr.pop();
-        display_calculations.textContent = calculationsArr.join('');
-
-        return;
-    };
-    
-});
-
-// Dot button
-
-dotBtn.addEventListener('click', () => {
+const addDecimal = function() {
 
     // Preventing user from the double dot
     if(firstNumberArray[firstNumberArray.length-1] == '.' || secondNumberArray[secondNumberArray.length-1] == '.') return;
@@ -136,24 +58,122 @@ dotBtn.addEventListener('click', () => {
 
         return;
     };
+};
+
+
+const calcResult = function(){
+    
+    if (!firstNumber || !operator || !secondNumber) {
+        console.log("Please choose all of the parameters for your calculation");
+
+        return;
+    }
+
+    operate(firstNumber,secondNumber,operator);
+
+    return;
+};
+
+const deleteDigit = function() {
+
+     // Deleting last digit of the first number
+     if(!secondNumberArray.length) {
+        firstNumberArray.pop();
+        firstNumber = firstNumberArray.join('');
+        
+        display_currentValue.textContent = firstNumber;
+        calculationsArr.pop();
+        display_calculations.textContent = calculationsArr.join('');
+
+        return;
+    };
+    
+    // Deleting last digit of the second number
+    if(secondNumberArray.length) {
+        secondNumberArray.pop();
+        secondNumber = secondNumberArray.join('');
+        display_currentValue.textContent = secondNumber;
+        calculationsArr.pop();
+        display_calculations.textContent = calculationsArr.join('');
+
+        return;
+    };
+
+};
+
+
+/////////////////////////
+// EVENT LISTENERS FOR ALL BUTTONS
+
+// All digits buttons
+numBtn.forEach((button)=> {
+    button.addEventListener('click', () => {
+        currentValue = button.dataset.value; // for calculations
+        currentButton = button.textContent; // for display
+        assignNumVariables();
+    });
+});
+
+// All operator buttons (add, substract, multiply, divide)
+funcBtn.forEach((button) => {
+    button.addEventListener('click', () => {
+        currentValue = button.dataset.value; // for calculations
+        currentButton = button.textContent; // for display 
+        assignOperator();
+    });
+});
+
+// Equal sign button
+equalBtn.addEventListener('click', calcResult);
+
+
+// All Clear (AC) button 
+allClearBtn.addEventListener('click', () => {
+
+    // Resetting all variables and arrays
+    firstNumberArray = []; 
+    secondNumberArray = [];
+    firstNumber = null;
+    secondNumber = null;
+    operator = null;
+    result = null;
+
+    // Updating display
+    display_currentValue.textContent = 0;
+    display_calculations.textContent = '';
+    calculationsArr = [];
+    display_calculations.textContent = calculationsArr.join('');
 
 });
+
+// Delete button 
+
+deleteBtn.addEventListener('click', deleteDigit);
+
+// Dot button
+
+dotBtn.addEventListener('click', addDecimal);
 
 // Keyboard support 
 
 window.addEventListener('keydown', (e) => {
     
     console.log(e.key, typeof e.key);
-
+    // Selecting queries
     const numBtn = document.querySelector(`.num-btn[data-value="${e.key}`);
     const functionBtn = document.querySelector(`.function-btn[data-value="${e.key}`);
-    if(!numBtn && !functionBtn) console.log("wrong button");
+    const dotBtn = document.querySelector(`.dot-btn[data-value="${e.key}`);
+    const equalBtn = document.querySelector(`.equal-btn[data-value="${e.key}`);
+    const delBtn = document.querySelector(`.delete-btn[data-value="${e.key}`);
+
 
     if(numBtn) {
         currentValue = numBtn.dataset.value;
         currentButton = numBtn.textContent; 
 
         assignNumVariables();
+
+        return;
     };
 
     if(functionBtn) {
@@ -162,7 +182,23 @@ window.addEventListener('keydown', (e) => {
        
         assignOperator();
 
+        return;
     };
+
+    if(dotBtn) {
+        addDecimal();
+        return;
+    }
+
+    if(equalBtn) {
+        calcResult();
+        return;
+    };
+
+    if(delBtn) {
+        deleteDigit();
+        return;
+    }
 
 });
 
@@ -291,6 +327,7 @@ const assignOperator = function() {
     return;
     
 };
+
 
 /////////////////////////
 // BASIC CALCULATOR FUNCTIONS
