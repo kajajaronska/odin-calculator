@@ -87,6 +87,7 @@ const deleteDigit = function() {
 
         return;
     };
+
     
     // Deleting last digit of the second number
     if(secondNumberArray.length) {
@@ -117,6 +118,13 @@ numBtn.forEach((button)=> {
 // All operator buttons (add, substract, multiply, divide)
 funcBtn.forEach((button) => {
     button.addEventListener('click', () => {
+
+        if(!firstNumber) {
+            alert("Hey! Choose a number first");
+    
+            return;
+        }
+
         currentValue = button.dataset.value; // for calculations
         currentButton = button.textContent; // for display 
         assignOperator();
