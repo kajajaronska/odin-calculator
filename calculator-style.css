@@ -30,7 +30,6 @@
 :root,
 :root.desert {
     --num-btns-color:#F7D3AA;
-    /* --desert-2:#DF9D6C; */
     --function-btns-color:#D4814E;
     --display-color:#935B3E;
     --main-container-color:#623624;
@@ -118,32 +117,40 @@ body {
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
-
-    background-color: rgb(243, 235, 126);
+    border: white 1px solid;
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    font-weight: 800;
+    color: var(--function-btns-color);
+
+
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
 }
 
 .style-info {
-    color: black;
+    color: var(--main-container-color);
+    font-weight: bold;
 }
 
-.desert {
+/* .desert {
     color: var(--desert-1);
+    color: black;
     background-color: var(--desert-4);
-}
+} */
 
-.ocean {
+/* .ocean {
     color: var(--ocean-5);
     background-color: var(--ocean-2);
-}
+} */
 
-.forest {
+/* .forest {
     color: var(--forest-1);
     background-color: var(--forest-5);
-}
+} */
 
 /*****************************/
 /* MAIN CONTAINER */

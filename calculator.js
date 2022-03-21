@@ -375,7 +375,6 @@ const operate = function(firstNum, secondNum, operator) {
 /////////////////////////
 // COLOR PALLETES FUNCTIONALITY
 
-
 const setTheme = (theme) => document.documentElement.className = theme;
 
 styleBtn.forEach((button)=>{
