@@ -109,6 +109,41 @@ const deleteDigit = function() {
 
 };
 
+const calcPercentage = function() {
+
+    // If there is no second number and percentage button is clicked return 1% of the current number
+    if(firstNumber && !secondNumber) {
+        longResult = firstNumber * 0.01;
+
+        result = Math.round(longResult * 1000000000000)/1000000000000;
+        firstNumber = result;
+        
+
+        // Updating display
+        display_currentValue.textContent = result;
+        display_calculations.textContent = '';
+        calculationsArr = [];
+        calculationsArr.push(String(result));
+        display_calculations.textContent = calculationsArr.join('');
+
+
+        return result;
+    };
+
+    if(firstNumber && operator && secondNumber) {
+        secondNumber = secondNumber/100; 
+
+        currentValue = percentageBtn.dataset.value; // for calculations
+        currentButton = percentageBtn.textContent; // for display
+
+        display_currentValue.textContent = secondNumber;
+        updateCalcDisplay();
+
+        return;
+
+    }
+
+}
 
 /////////////////////////
 // EVENT LISTENERS FOR ALL BUTTONS
@@ -140,40 +175,7 @@ funcBtn.forEach((button) => {
 
 // Percentage button 
 
-percentageBtn.addEventListener('click', ()=> {
-
-    // If there is no second number and percentage button is clicked return 1% of the current number
-    if(firstNumber && !secondNumber) {
-        longResult = firstNumber * 0.01;
-
-        result = Math.round(longResult * 1000000000000)/1000000000000;
-        firstNumber = result;
-        
-
-        // Updating display
-        display_currentValue.textContent = result;
-        display_calculations.textContent = '';
-        calculationsArr = [];
-        calculationsArr.push(String(result));
-        display_calculations.textContent = calculationsArr.join('');
-
-
-        return result;
-    };
-
-    if(firstNumber && operator && secondNumber) {
-        secondNumber = secondNumber/100; 
-
-        currentValue = percentageBtn.dataset.value; // for calculations
-        currentButton = percentageBtn.textContent; // for display
-
-        display_currentValue.textContent = secondNumber;
-        updateCalcDisplay();
-
-    }
-
-
-})
+percentageBtn.addEventListener('click', calcPercentage);
 
 
 // Equal sign button
@@ -217,6 +219,7 @@ window.addEventListener('keydown', (e) => {
     const dotBtn = document.querySelector(`.dot-btn[data-value="${e.key}`);
     const equalBtn = document.querySelector(`.equal-btn[data-value="${e.key}`);
     const delBtn = document.querySelector(`.delete-btn[data-value="${e.key}`);
+    const percBtn = document.querySelector(`.percentage-btn[data-value="${e.key}`);
 
 
     if(numBtn) {
@@ -249,6 +252,11 @@ window.addEventListener('keydown', (e) => {
 
     if(delBtn) {
         deleteDigit();
+        return;
+    }
+
+    if(percBtn) {
+        calcPercentage();
         return;
     }
 
