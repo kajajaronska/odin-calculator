@@ -6,27 +6,7 @@
 /*****************************/
 /* VARIABLES */
 /*****************************/
-/*  
-    --desert-1:#F7D3AA;
-    --desert-2:#DF9D6C;
-    --desert-3:#D4814E;
-    --desert-4:#935B3E;
-    --desert-5:#623624;
-    --desert-6:#FFF1E1;
 
-    --forest-1:#EDE6D5;
-    --forest-2:#AD9984;
-    --forest-3:#6B5949;
-    --forest-4:#B3C799;
-    --forest-5:#788264;
-
-    --ocean-1:#22223B;
-    --ocean-2:#4A4E69;
-    --ocean-3:#9A8C98;
-    --ocean-4:#C9ADA7;
-    --ocean-5:#F2E9E4;
-
-*/
 :root,
 :root.desert {
     --num-btns-color:#F7D3AA;
@@ -118,6 +98,7 @@ body {
     height: 5rem;
     border-radius: 50%;
     border: white 1px solid;
+    cursor: pointer;
 
     display: flex;
     justify-content: center;
@@ -125,7 +106,6 @@ body {
 
     font-weight: 800;
     color: var(--function-btns-color);
-
 
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
@@ -136,21 +116,6 @@ body {
     font-weight: bold;
 }
 
-/* .desert {
-    color: var(--desert-1);
-    color: black;
-    background-color: var(--desert-4);
-} */
-
-/* .ocean {
-    color: var(--ocean-5);
-    background-color: var(--ocean-2);
-} */
-
-/* .forest {
-    color: var(--forest-1);
-    background-color: var(--forest-5);
-} */
 
 /*****************************/
 /* MAIN CONTAINER */
@@ -223,7 +188,6 @@ body {
     width: 7.25rem;
     height: 7.25rem;
     border-radius: 50%;
-    /* border: black 1px solid; */
     background-color: var(--num-btns-color);
     font-size: 5rem;
     font-weight: 600;
@@ -231,6 +195,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
 }
 

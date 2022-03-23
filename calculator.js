@@ -7,6 +7,7 @@ const btn = document.querySelectorAll('.button');
 const numBtn = document.querySelectorAll('.num-btn');
 const funcBtn = document.querySelectorAll('.function-btn');
 const equalBtn = document.querySelector('.equal-btn');
+const percentageBtn = document.querySelector('.percentage-btn');
 const allClearBtn = document.querySelector('.clear-btn');
 const deleteBtn = document.querySelector('.delete-btn');
 const dotBtn = document.querySelector('.dot-btn');
@@ -27,7 +28,6 @@ let currentButton = null;
 let calculationsArr = [];
 
 display_calculations.textContent = calculationsArr.join('');
-
 
 
 //////////////////////////
@@ -83,8 +83,6 @@ const calcResult = function(){
 
 const deleteDigit = function() {
 
-
-
      // Deleting last digit of the first number
      if(!secondNumberArray.length) {
         firstNumberArray.pop();
@@ -129,7 +127,7 @@ funcBtn.forEach((button) => {
     button.addEventListener('click', () => {
 
         if(!firstNumber) {
-            alert("Hey! Choose a number first");
+            alert("Hey! Choose a number first.");
     
             return;
         }
@@ -139,6 +137,46 @@ funcBtn.forEach((button) => {
         assignOperator();
     });
 });
+
+// Percentage button 
+
+percentageBtn.addEventListener('click', ()=> {
+    console.log("Percentage button clicked!");
+
+    // If there is no second number and percentage button is clicked return 1% of the current number
+    if(firstNumber && !secondNumber) {
+        longResult = firstNumber * 0.01;
+
+        result = Math.round(longResult * 1000000000000)/1000000000000;
+        firstNumber = result;
+        
+
+        // Updating display
+        display_currentValue.textContent = result;
+        display_calculations.textContent = '';
+        calculationsArr = [];
+        calculationsArr.push(String(result));
+        display_calculations.textContent = calculationsArr.join('');
+
+
+        return result;
+    };
+
+    if(firstNumber && operator && secondNumber) {
+        secondNumber = secondNumber/100; 
+
+        currentValue = percentageBtn.dataset.value; // for calculations
+        currentButton = percentageBtn.textContent; // for display
+
+        display_currentValue.textContent = secondNumber;
+        updateCalcDisplay();
+        console.log(secondNumber);
+
+    }
+
+
+})
+
 
 // Equal sign button
 equalBtn.addEventListener('click', calcResult);
@@ -379,7 +417,6 @@ const setTheme = (theme) => document.documentElement.className = theme;
 
 styleBtn.forEach((button)=>{
     button.addEventListener('click', ()=> {
-        console.log(button.dataset.value);
         setTheme(button.dataset.value);
     });
 });
