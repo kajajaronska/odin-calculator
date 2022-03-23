@@ -141,7 +141,6 @@ funcBtn.forEach((button) => {
 // Percentage button 
 
 percentageBtn.addEventListener('click', ()=> {
-    console.log("Percentage button clicked!");
 
     // If there is no second number and percentage button is clicked return 1% of the current number
     if(firstNumber && !secondNumber) {
@@ -170,7 +169,6 @@ percentageBtn.addEventListener('click', ()=> {
 
         display_currentValue.textContent = secondNumber;
         updateCalcDisplay();
-        console.log(secondNumber);
 
     }
 
@@ -213,7 +211,6 @@ dotBtn.addEventListener('click', addDecimal);
 
 window.addEventListener('keydown', (e) => {
     
-    console.log(e.key, typeof e.key);
     // Selecting queries
     const numBtn = document.querySelector(`.num-btn[data-value="${e.key}`);
     const functionBtn = document.querySelector(`.function-btn[data-value="${e.key}`);
