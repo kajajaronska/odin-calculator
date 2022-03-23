@@ -111,27 +111,28 @@ const deleteDigit = function() {
 
 const calcPercentage = function() {
 
+    currentValue = percentageBtn.dataset.value; // for calculations
+    currentButton = percentageBtn.textContent; // for display
+
+
     // If there is no second number and percentage button is clicked return 1% of the current number
     if(firstNumber && !secondNumber) {
-        longResult = firstNumber * 0.01;
+  
+        operator = '*'
+        secondNumber = 0.01;
 
-        result = Math.round(longResult * 1000000000000)/1000000000000;
-        firstNumber = result;
-        
+        operate(firstNumber, secondNumber, operator);
 
         // Updating display
         display_currentValue.textContent = result;
-        display_calculations.textContent = '';
-        calculationsArr = [];
-        calculationsArr.push(String(result));
-        display_calculations.textContent = calculationsArr.join('');
+        updateCalcDisplay();
 
 
-        return result;
+        return;
     };
 
     if(firstNumber && operator && secondNumber) {
-        secondNumber = secondNumber/100; 
+        secondNumber = firstNumber *(secondNumber/100); 
 
         currentValue = percentageBtn.dataset.value; // for calculations
         currentButton = percentageBtn.textContent; // for display
