@@ -125,7 +125,8 @@ const calcPercentage = function() {
 
         // Updating display
         display_currentValue.textContent = result;
-        currentButton = '';
+        calculationsArr= [];
+        currentButton =result;
         updateCalcDisplay();
 
 
