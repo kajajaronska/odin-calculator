@@ -125,6 +125,7 @@ const calcPercentage = function() {
 
         // Updating display
         display_currentValue.textContent = result;
+        currentButton = '';
         updateCalcDisplay();
 
 
@@ -133,9 +134,6 @@ const calcPercentage = function() {
 
     if(firstNumber && operator && secondNumber) {
         secondNumber = firstNumber *(secondNumber/100); 
-
-        currentValue = percentageBtn.dataset.value; // for calculations
-        currentButton = percentageBtn.textContent; // for display
 
         display_currentValue.textContent = secondNumber;
         updateCalcDisplay();
