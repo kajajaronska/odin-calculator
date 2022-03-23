@@ -40,13 +40,11 @@ const updateCalcDisplay = function(){
 
 const addDecimal = function() {
 
-    // Preventing user from the double dot
-    if(firstNumberArray[firstNumberArray.length-1] == '.' || secondNumberArray[secondNumberArray.length-1] == '.') return;
-
     currentValue = dotBtn.dataset.value; // for calculations
     currentButton = dotBtn.textContent; // for display
 
     if(firstNumber && !operator && !secondNumber) {
+        if(firstNumberArray.includes('.')) return;
         firstNumberArray.push(currentValue);
         firstNumber = firstNumberArray.join('');
 
@@ -57,6 +55,8 @@ const addDecimal = function() {
     };
 
     if(firstNumber && operator && secondNumber) {
+        if(secondNumberArray.includes('.')) return;
+
         secondNumberArray.push(currentValue);
         secondNumber = secondNumberArray.join('');
 
